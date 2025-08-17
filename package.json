@@ -1,0 +1,52 @@
+{
+  "name": "vedic-astrology-chart",
+  "version": "0.1.0",
+  "description": "Beautiful Vedic (Jyotish) astrology chart component for React",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hew/vedic-astrology-chart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hew/vedic-astrology-chart/issues"
+  },
+  "homepage": "https://github.com/hew/vedic-astrology-chart#readme",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "keywords": [
+    "vedic",
+    "astrology",
+    "jyotish",
+    "chart",
+    "horoscope",
+    "react",
+    "svg",
+    "nakshatras",
+    "rashi",
+    "navamsa",
+    "hindu-astrology"
+  ],
+  "author": "Matthew Jones",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
