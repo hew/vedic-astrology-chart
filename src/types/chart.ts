@@ -1,7 +1,7 @@
-import { PlanetaryPositions } from "./planets";
+import { PlanetaryPositions } from './planets';
 
-export type ChartStyle = "north" | "south";
-export type PlanetDisplayMode = "symbols" | "names";
+export type ChartStyle = 'north' | 'south';
+export type PlanetDisplayMode = 'symbols' | 'names';
 
 export interface VedicChartData {
   planets: PlanetaryPositions;
@@ -13,8 +13,6 @@ export interface VedicChartProps extends VedicChartData {
   style?: ChartStyle;
   width?: number;
   height?: number;
-  showNakshatras?: boolean;
-  showHouseNumbers?: boolean;
   showHouseLabels?: boolean;
   planetDisplayMode?: PlanetDisplayMode;
 }

@@ -30,7 +30,7 @@ yarn add vedic-astrology-chart
 ## Quick Start
 
 ```tsx
-import { VedicChart } from "vedic-astrology-chart";
+import { VedicChart } from 'vedic-astrology-chart';
 
 function MyChart() {
   const birthChart = {
@@ -95,17 +95,17 @@ To run the demo locally:
 
 ### VedicChart Props
 
-| Prop                | Type                   | Default      | Description                                          |
-| ------------------- | ---------------------- | ------------ | ---------------------------------------------------- |
-| `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)         |
-| `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                 |
-| `ayanamsa`          | `number`               | **required** | Ayanamsa value in degrees                            |
-| `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                   |
-| `width`             | `number`               | `600`        | Chart width in pixels                                |
-| `height`            | `number`               | `600`        | Chart height in pixels                               |
-| `showNakshatras`    | `boolean`              | `true`       | Show nakshatra information                           |
-| `showHouseNumbers`  | `boolean`              | `true`       | Show house numbers (1, 2, 3, etc.)                   |
-| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                    |
+| Prop                | Type                   | Default      | Description                                           |
+| ------------------- | ---------------------- | ------------ | ----------------------------------------------------- |
+| `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)          |
+| `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                  |
+| `ayanamsa`          | `number`               | **required** | Ayanamsa value in degrees                             |
+| `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                    |
+| `width`             | `number`               | `600`        | Chart width in pixels                                 |
+| `height`            | `number`               | `600`        | Chart height in pixels                                |
+| `showNakshatras`    | `boolean`              | `true`       | Show nakshatra information                            |
+| `showHouseNumbers`  | `boolean`              | `true`       | Show house numbers (1, 2, 3, etc.)                    |
+| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                     |
 | `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju) |
 
 ### PlanetaryPositions

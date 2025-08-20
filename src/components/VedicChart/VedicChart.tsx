@@ -10,10 +10,8 @@ const VedicChart: React.FC<VedicChartProps> = ({
   style = 'north',
   width = 600,
   height = 600,
-  showNakshatras = true,
-  showHouseNumbers = true,
   showHouseLabels = true,
-  planetDisplayMode = 'symbols'
+  planetDisplayMode = 'symbols',
 }) => {
   const chartProps = {
     planets,
@@ -21,10 +19,8 @@ const VedicChart: React.FC<VedicChartProps> = ({
     ayanamsa,
     width,
     height,
-    showNakshatras,
-    showHouseNumbers,
     showHouseLabels,
-    planetDisplayMode
+    planetDisplayMode,
   };
 
   return (

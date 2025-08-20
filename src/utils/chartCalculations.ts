@@ -1,5 +1,5 @@
-import { PlanetaryPositions, HouseInfo, PlanetDisplayMode } from "../types";
-import { degreeToSign, degreeToNakshatra, normalizeDegree } from "./astroUtils";
+import { PlanetaryPositions, HouseInfo, PlanetDisplayMode } from '../types';
+import { degreeToSign, normalizeDegree } from './astroUtils';
 
 // Helper function to normalize Rahu-Ketu opposition
 export function normalizePlanetaryPositions(
@@ -44,7 +44,7 @@ export function calculateHouses(
     const planetSignIndex = Math.floor(planetSignStart / 30);
 
     // Calculate house number based on sign difference
-    let houseNumber = ((planetSignIndex - ascendantSignIndex + 12) % 12) + 1;
+    const houseNumber = ((planetSignIndex - ascendantSignIndex + 12) % 12) + 1;
 
     const house = houses.find((h) => h.number === houseNumber);
     if (house) {
@@ -57,39 +57,39 @@ export function calculateHouses(
 
 export function getPlanetSymbol(planetName: string): string {
   const symbols: { [key: string]: string } = {
-    Sun: "☉",
-    Moon: "☽",
-    Mars: "♂",
-    Mercury: "☿",
-    Jupiter: "♃",
-    Venus: "♀",
-    Saturn: "♄",
-    Rahu: "☊",
-    Ketu: "☋",
+    Sun: '☉',
+    Moon: '☽',
+    Mars: '♂',
+    Mercury: '☿',
+    Jupiter: '♃',
+    Venus: '♀',
+    Saturn: '♄',
+    Rahu: '☊',
+    Ketu: '☋',
   };
   return symbols[planetName] || planetName.substring(0, 1);
 }
 
 export function getPlanetName(planetName: string): string {
   const names: { [key: string]: string } = {
-    Sun: "Su",
-    Moon: "Mo",
-    Mars: "Ma",
-    Mercury: "Me",
-    Jupiter: "Ju",
-    Venus: "Ve",
-    Saturn: "Sa",
-    Rahu: "Ra",
-    Ketu: "Ke",
+    Sun: 'Su',
+    Moon: 'Mo',
+    Mars: 'Ma',
+    Mercury: 'Me',
+    Jupiter: 'Ju',
+    Venus: 'Ve',
+    Saturn: 'Sa',
+    Rahu: 'Ra',
+    Ketu: 'Ke',
   };
   return names[planetName] || planetName.substring(0, 1);
 }
 
 export function getPlanetDisplay(
   planetName: string,
-  mode: PlanetDisplayMode = "symbols"
+  mode: PlanetDisplayMode = 'symbols'
 ): string {
-  return mode === "symbols"
+  return mode === 'symbols'
     ? getPlanetSymbol(planetName)
     : getPlanetName(planetName);
 }
@@ -105,7 +105,7 @@ export function formatDegree(degree: number): string {
     return `${wholeDegrees + 1}°00'`;
   }
 
-  return `${wholeDegrees}°${minutes.toString().padStart(2, "0")}'`;
+  return `${wholeDegrees}°${minutes.toString().padStart(2, '0')}'`;
 }
 
 export function getPlanetDegree(
@@ -117,7 +117,7 @@ export function getPlanetDegree(
   let degree = normalizedPlanets[planetName as keyof PlanetaryPositions];
 
   // Special handling for Rahu-Ketu to ensure identical degree/minute display
-  if (planetName === "Ketu" && normalizedPlanets.Rahu !== undefined) {
+  if (planetName === 'Ketu' && normalizedPlanets.Rahu !== undefined) {
     const rahuDegree = normalizedPlanets.Rahu;
     // Calculate Ketu's degree using Rahu's exact position
     degree = (rahuDegree + 180) % 360;

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-const PlanetaryInput: React.FC<{ onSubmit: (data: { planetaryPositions: string; ascendant: string; ayanamsa: string }) => void }> = ({ onSubmit }) => {
+const PlanetaryInput: React.FC<{
+  onSubmit: (data: {
+    planetaryPositions: string;
+    ascendant: string;
+    ayanamsa: string;
+  }) => void;
+}> = ({ onSubmit }) => {
   const [planetaryPositions, setPlanetaryPositions] = useState('');
   const [ascendant, setAscendant] = useState('');
   const [ayanamsa, setAyanamsa] = useState('');

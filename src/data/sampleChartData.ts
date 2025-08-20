@@ -1,8 +1,8 @@
-import { VedicChartData } from "../types";
+import { VedicChartData } from '../types';
 
 export const sampleChartData: VedicChartData = {
   planets: {
-    Sun: 400.2, // Sidereal positions
+    Sun: 110.2, // Sidereal positions
     Moon: 279.5,
     Mars: 110.1,
     Mercury: 140.1,

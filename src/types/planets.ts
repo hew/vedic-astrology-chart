@@ -1,13 +1,13 @@
 export type PlanetName =
-  | "Sun"
-  | "Moon"
-  | "Mars"
-  | "Mercury"
-  | "Jupiter"
-  | "Venus"
-  | "Saturn"
-  | "Rahu"
-  | "Ketu";
+  | 'Sun'
+  | 'Moon'
+  | 'Mars'
+  | 'Mercury'
+  | 'Jupiter'
+  | 'Venus'
+  | 'Saturn'
+  | 'Rahu'
+  | 'Ketu';
 
 export interface PlanetaryPositions {
   Sun: number;
