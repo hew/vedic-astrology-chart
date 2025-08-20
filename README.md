@@ -13,6 +13,7 @@ A beautiful React component for rendering Vedic (Jyotish) astrology charts. Supp
 - **Ascendant Display**: Shows ascendant with exact degrees in both chart formats
 - **Smart Stacking**: Automatic vertical stacking when multiple planets occupy the same house
 - **Rahu-Ketu Synchronization**: Ensures North and South nodes are exactly 180° apart
+- **Dynamic House Labels**: Shows zodiac sign numbers (1-12) based on ascendant position
 - **Customizable**: Adjustable dimensions, house numbers, zodiac labels, and nakshatra display
 - **TypeScript**: Full type safety and IntelliSense support
 
@@ -20,6 +21,10 @@ A beautiful React component for rendering Vedic (Jyotish) astrology charts. Supp
 
 ```bash
 npm install vedic-astrology-chart
+# or
+bun add vedic-astrology-chart
+# or
+yarn add vedic-astrology-chart
 ```
 
 ## Quick Start
@@ -73,13 +78,15 @@ To run the demo locally:
 2. Install dependencies:
 
    ```bash
-   npm install
+   bun install
+   # or npm install
    ```
 
 3. Start the development server:
 
    ```bash
-   npm run dev
+   bun run dev
+   # or npm run dev
    ```
 
 4. Open your browser and navigate to `http://localhost:3000`
@@ -98,7 +105,7 @@ To run the demo locally:
 | `height`            | `number`               | `600`        | Chart height in pixels                               |
 | `showNakshatras`    | `boolean`              | `true`       | Show nakshatra information                           |
 | `showHouseNumbers`  | `boolean`              | `true`       | Show house numbers (1, 2, 3, etc.)                   |
-| `showHouseLabels`   | `boolean`              | `true`       | Show house numbers in chart                          |
+| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                    |
 | `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju) |
 
 ### PlanetaryPositions
@@ -126,6 +133,7 @@ interface PlanetaryPositions {
 - Houses arranged in clockwise sequence starting from ascendant
 - Kendra houses (1, 4, 7, 10) in diamond positions
 - Ascendant and planets stack vertically when in same house
+- Dynamic house labels show zodiac sign numbers based on ascendant
 
 ### South Indian Style
 
@@ -134,6 +142,7 @@ interface PlanetaryPositions {
 - Fixed house positions regardless of ascendant
 - Corner houses with diagonal divisions
 - Ascendant appears in house 1 (bottom-right corner)
+- Dynamic house labels show zodiac sign numbers based on ascendant
 
 ## Planet Display Options
 
@@ -181,6 +190,18 @@ This component uses the **Whole Sign House System**, where:
 - Traditional Vedic approach to house division
 - First house always starts with the ascendant's sign
 
+## Dynamic House Labels
+
+House labels show zodiac sign numbers (1-12) that correspond to the actual signs in each house:
+
+- **Sign Numbers**: Aries=1, Taurus=2, Gemini=3, Cancer=4, Leo=5, Virgo=6, Libra=7, Scorpio=8, Sagittarius=9, Capricorn=10, Aquarius=11, Pisces=12
+- **Example**: If ascendant is in Scorpio (8), then house labels will be:
+  - 1st house = 8 (Scorpio)
+  - 2nd house = 9 (Sagittarius)
+  - 3rd house = 10 (Capricorn)
+  - ...
+  - 12th house = 7 (Libra)
+
 ## Smart Features
 
 ### Automatic Stacking
@@ -203,7 +224,7 @@ When multiple planets occupy the same house:
 
 ### Display Controls
 
-- **House Numbers**: Toggle display of house numbers (1, 2, 3, etc.)
+- **House Labels**: Toggle display of zodiac sign numbers (1-12)
 - **Planet Display**: Choose between astronomical symbols or abbreviated names
 - **Nakshatras**: Optional nakshatra information display
 
