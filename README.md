@@ -92,15 +92,16 @@ To run the demo locally:
 
 ### VedicChart Props
 
-| Prop                | Type                   | Default      | Description                                           |
-| ------------------- | ---------------------- | ------------ | ----------------------------------------------------- |
-| `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)          |
-| `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                  |
-| `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                    |
-| `width`             | `number`               | `600`        | Chart width in pixels                                 |
-| `height`            | `number`               | `600`        | Chart height in pixels                                |
-| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                     |
-| `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju) |
+| Prop                | Type                   | Default      | Description                                                      |
+| ------------------- | ---------------------- | ------------ | ---------------------------------------------------------------- |
+| `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)                     |
+| `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                             |
+| `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                               |
+| `width`             | `number`               | `600`        | Chart width in pixels                                            |
+| `height`            | `number`               | `600`        | Chart height in pixels                                           |
+| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                                |
+| `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju)            |
+| `allowKetuOverride` | `boolean`              | `false`      | Allow custom Ketu position instead of auto-calculating from Rahu |
 
 ### PlanetaryPositions
 
@@ -227,6 +228,49 @@ When multiple planets occupy the same house:
 - **Customizable Dimensions**: Set width and height as needed
 - **Clean Typography**: Optimized font sizes for readability
 - **Color Coding**: Different colors for planets, ascendant, and house labels
+
+## Advanced Usage
+
+### Custom Ketu Position (Divisional Charts)
+
+For divisional charts where Ketu might not be exactly opposite to Rahu:
+
+```tsx
+const divisionalChartData = {
+  planets: {
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 180.5, // Custom position - not exactly opposite to Rahu
+  },
+  ascendant: 15.5,
+};
+
+<VedicChart
+  {...divisionalChartData}
+  allowKetuOverride={true} // Allow custom Ketu position
+  style="north"
+  width={600}
+  height={600}
+/>;
+```
+
+### Default Behavior (Birth Charts)
+
+For standard birth charts where Ketu should be exactly 180° from Rahu:
+
+```tsx
+<VedicChart
+  {...birthChartData}
+  allowKetuOverride={false} // Auto-calculate Ketu from Rahu (default)
+  style="north"
+/>
+```
 
 ## Contributing
 

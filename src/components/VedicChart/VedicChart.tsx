@@ -12,6 +12,7 @@ const VedicChart: React.FC<VedicChartProps> = ({
   height = 600,
   showHouseLabels = true,
   planetDisplayMode = 'symbols',
+  allowKetuOverride = false,
 }) => {
   const chartProps = {
     planets,
@@ -21,6 +22,7 @@ const VedicChart: React.FC<VedicChartProps> = ({
     height,
     showHouseLabels,
     planetDisplayMode,
+    allowKetuOverride,
   };
 
   return (

@@ -1,13 +1,15 @@
-import { PlanetaryPositions, HouseInfo, PlanetDisplayMode } from '../types';
+import { HouseInfo, PlanetaryPositions, PlanetDisplayMode } from '../types';
 import { degreeToSign, normalizeDegree } from './astroUtils';
 
 // Helper function to normalize Rahu-Ketu opposition
 export function normalizePlanetaryPositions(
-  planets: PlanetaryPositions
+  planets: PlanetaryPositions,
+  allowKetuOverride: boolean = false
 ): PlanetaryPositions {
   const normalized = { ...planets };
 
-  if (normalized.Rahu !== undefined) {
+  // Only auto-calculate Ketu if override is not allowed and Rahu exists
+  if (!allowKetuOverride && normalized.Rahu !== undefined) {
     // Ensure Ketu is exactly 180° opposite to Rahu
     normalized.Ketu = (normalized.Rahu + 180) % 360;
   }
@@ -17,10 +19,14 @@ export function normalizePlanetaryPositions(
 
 export function calculateHouses(
   planets: PlanetaryPositions,
-  ascendant: number
+  ascendant: number,
+  allowKetuOverride: boolean = false
 ): HouseInfo[] {
   // Normalize planetary positions first
-  const normalizedPlanets = normalizePlanetaryPositions(planets);
+  const normalizedPlanets = normalizePlanetaryPositions(
+    planets,
+    allowKetuOverride
+  );
 
   const houses: HouseInfo[] = [];
 
@@ -110,14 +116,23 @@ export function formatDegree(degree: number): string {
 
 export function getPlanetDegree(
   planetName: string,
-  planets: PlanetaryPositions
+  planets: PlanetaryPositions,
+  allowKetuOverride: boolean = false
 ): string {
-  // Normalize planets first to ensure Rahu-Ketu are exactly opposite
-  const normalizedPlanets = normalizePlanetaryPositions(planets);
+  // Normalize planets first
+  const normalizedPlanets = normalizePlanetaryPositions(
+    planets,
+    allowKetuOverride
+  );
   let degree = normalizedPlanets[planetName as keyof PlanetaryPositions];
 
   // Special handling for Rahu-Ketu to ensure identical degree/minute display
-  if (planetName === 'Ketu' && normalizedPlanets.Rahu !== undefined) {
+  // Only if override is not allowed
+  if (
+    !allowKetuOverride &&
+    planetName === 'Ketu' &&
+    normalizedPlanets.Rahu !== undefined
+  ) {
     const rahuDegree = normalizedPlanets.Rahu;
     // Calculate Ketu's degree using Rahu's exact position
     degree = (rahuDegree + 180) % 360;

@@ -2,8 +2,8 @@ import React from 'react';
 import { VedicChartProps } from '../../types';
 import {
   calculateHouses,
-  getPlanetDisplay,
   getPlanetDegree,
+  getPlanetDisplay,
 } from '../../utils';
 import {
   formatAscendantDegree,
@@ -20,8 +20,9 @@ const NorthIndianChart: React.FC<ChartProps> = ({
   height = 600,
   showHouseLabels = true,
   planetDisplayMode = 'symbols',
+  allowKetuOverride = false,
 }) => {
-  const houses = calculateHouses(planets, ascendant);
+  const houses = calculateHouses(planets, ascendant, allowKetuOverride);
   const centerX = width / 2;
   const centerY = height / 2;
   const size = Math.min(width, height);
@@ -268,7 +269,7 @@ const NorthIndianChart: React.FC<ChartProps> = ({
                     <tspan fontWeight="normal" fill="#666">
                       {' '}
                       {house.sign.substring(0, 3)}{' '}
-                      {getPlanetDegree(planetName, planets)}
+                      {getPlanetDegree(planetName, planets, allowKetuOverride)}
                     </tspan>
                   </text>
                 </g>
