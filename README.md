@@ -9,12 +9,12 @@ A beautiful React component for rendering Vedic (Jyotish) astrology charts. Supp
 - **Dual Chart Formats**: North Indian (diamond) and South Indian (grid) styles
 - **Whole Sign System**: Accurate Vedic astrology house calculations
 - **Flexible Planet Display**: Choose between traditional astronomical symbols or abbreviated names
-- **Sidereal Positions**: Works with sidereal planetary positions and ayanamsa
+- **Sidereal Positions**: Works with sidereal planetary positions
 - **Ascendant Display**: Shows ascendant with exact degrees in both chart formats
 - **Smart Stacking**: Automatic vertical stacking when multiple planets occupy the same house
 - **Rahu-Ketu Synchronization**: Ensures North and South nodes are exactly 180° apart
 - **Dynamic House Labels**: Shows zodiac sign numbers (1-12) based on ascendant position
-- **Customizable**: Adjustable dimensions, house numbers, zodiac labels, and nakshatra display
+- **Customizable**: Adjustable dimensions, house numbers, zodiac labels
 - **TypeScript**: Full type safety and IntelliSense support
 
 ## Installation
@@ -46,7 +46,6 @@ function MyChart() {
       Ketu: 222.3, // South Node (automatically synchronized to be 180° from Rahu)
     },
     ascendant: 15.5, // Sidereal ascendant in degrees
-    ayanamsa: 24.12, // Lahiri ayanamsa
   };
 
   return (
@@ -55,8 +54,6 @@ function MyChart() {
       style="north" // or "south"
       width={600}
       height={600}
-      showNakshatras={true}
-      showHouseNumbers={true}
       showHouseLabels={true}
       planetDisplayMode="symbols" // or "names"
     />
@@ -99,12 +96,9 @@ To run the demo locally:
 | ------------------- | ---------------------- | ------------ | ----------------------------------------------------- |
 | `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)          |
 | `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                  |
-| `ayanamsa`          | `number`               | **required** | Ayanamsa value in degrees                             |
 | `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                    |
 | `width`             | `number`               | `600`        | Chart width in pixels                                 |
 | `height`            | `number`               | `600`        | Chart height in pixels                                |
-| `showNakshatras`    | `boolean`              | `true`       | Show nakshatra information                            |
-| `showHouseNumbers`  | `boolean`              | `true`       | Show house numbers (1, 2, 3, etc.)                    |
 | `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                     |
 | `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju) |
 
@@ -226,7 +220,6 @@ When multiple planets occupy the same house:
 
 - **House Labels**: Toggle display of zodiac sign numbers (1-12)
 - **Planet Display**: Choose between astronomical symbols or abbreviated names
-- **Nakshatras**: Optional nakshatra information display
 
 ### Styling
 
