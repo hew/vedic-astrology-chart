@@ -10,6 +10,9 @@ export const getPlanetColor = (planetName: string): string => {
     Saturn: '#4B0082', // Indigo (traditional Saturn color)
     Rahu: '#800080', // Purple (traditional Rahu color)
     Ketu: '#8B4513', // Saddle Brown (traditional Ketu color)
+    Uranus: '#16a085',
+    Neptune: '#2980b9',
+    Pluto: '#7f8c8d',
   };
   return colors[planetName] || '#d2691e'; // Default orange fallback
 };

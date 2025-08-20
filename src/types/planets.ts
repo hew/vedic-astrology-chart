@@ -7,7 +7,10 @@ export type PlanetName =
   | 'Venus'
   | 'Saturn'
   | 'Rahu'
-  | 'Ketu';
+  | 'Ketu'
+  | 'Uranus'
+  | 'Neptune'
+  | 'Pluto';
 
 export interface PlanetaryPositions {
   Sun: number;
@@ -19,6 +22,10 @@ export interface PlanetaryPositions {
   Saturn: number;
   Rahu: number;
   Ketu: number;
+  // Optional outer planets
+  Uranus?: number;
+  Neptune?: number;
+  Pluto?: number;
 }
 
 export interface PlanetInfo {

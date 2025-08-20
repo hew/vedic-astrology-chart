@@ -107,6 +107,7 @@ To run the demo locally:
 
 ```tsx
 interface PlanetaryPositions {
+  // Traditional Vedic planets (required)
   Sun: number; // 0-360 degrees
   Moon: number; // 0-360 degrees
   Mars: number; // 0-360 degrees
@@ -116,6 +117,11 @@ interface PlanetaryPositions {
   Saturn: number; // 0-360 degrees
   Rahu: number; // 0-360 degrees (North Node)
   Ketu: number; // 0-360 degrees (South Node - automatically synchronized with Rahu)
+
+  // Optional outer planets (modern astrology)
+  Uranus?: number; // 0-360 degrees (optional)
+  Neptune?: number; // 0-360 degrees (optional)
+  Pluto?: number; // 0-360 degrees (optional)
 }
 ```
 
@@ -143,9 +149,11 @@ interface PlanetaryPositions {
 
 ### Symbols Mode (`planetDisplayMode="symbols"`)
 
-Traditional astronomical symbols with sign and degree:
+Traditional and modern astronomical symbols:
 
-- **☉** Ari 15°30' (Sun in Aries at 15 degrees 30 minutes)
+**Traditional Vedic Planets:**
+
+- **☉** Ari 15°30' (Sun in Aries)
 - **☽** Tau 22°15' (Moon in Taurus)
 - **♂** Gem 8°45' (Mars in Gemini)
 - **☿** Can 28°12' (Mercury in Cancer)
@@ -153,21 +161,19 @@ Traditional astronomical symbols with sign and degree:
 - **♀** Vir 19°35' (Venus in Virgo)
 - **♄** Lib 14°48' (Saturn in Libra)
 - **☊** Sco 7°22' (Rahu in Scorpio)
-- **☋** Tau 7°22' (Ketu in Taurus - exactly opposite Rahu)
+- **☋** Tau 7°22' (Ketu in Taurus)
+
+**Optional Outer Planets:**
+
+- **♅** Aqu 12°45' (Uranus in Aquarius)
+- **♆** Pis 5°18' (Neptune in Pisces)
+- **♇** Cap 28°33' (Pluto in Capricorn)
 
 ### Names Mode (`planetDisplayMode="names"`)
 
-Abbreviated planet names with sign and degree:
+**Traditional Planets:** Su, Mo, Ma, Me, Ju, Ve, Sa, Ra, Ke
 
-- **Su** Ari 15°30'
-- **Mo** Tau 22°15'
-- **Ma** Gem 8°45'
-- **Me** Can 28°12'
-- **Ju** Leo 5°20'
-- **Ve** Vir 19°35'
-- **Sa** Lib 14°48'
-- **Ra** Sco 7°22'
-- **Ke** Tau 7°22'
+**Outer Planets:** Ur, Ne, Pl
 
 ### Ascendant Display
 
@@ -270,6 +276,78 @@ For standard birth charts where Ketu should be exactly 180° from Rahu:
   allowKetuOverride={false} // Auto-calculate Ketu from Rahu (default)
   style="north"
 />
+```
+
+### Including Outer Planets
+
+```tsx
+const modernVedicChart = {
+  planets: {
+    // Traditional planets (always required)
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+
+    // Optional outer planets
+    Uranus: 15.8,
+    Neptune: 340.2,
+    Pluto: 275.6,
+  },
+  ascendant: 15.5,
+};
+
+<VedicChart {...modernVedicChart} style="north" width={600} height={600} />;
+```
+
+### Traditional Vedic Chart (Without Outer Planets)
+
+```tsx
+const traditionalChart = {
+  planets: {
+    // Only the 9 traditional planets
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+    // Uranus, Neptune, Pluto are omitted
+  },
+  ascendant: 15.5,
+};
+```
+
+### Partial Outer Planet Inclusion
+
+```tsx
+const partialModernChart = {
+  planets: {
+    // Traditional planets
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+
+    // Include only some outer planets
+    Pluto: 275.6,
+    // Uranus and Neptune are omitted
+  },
+  ascendant: 15.5,
+};
 ```
 
 ## Contributing

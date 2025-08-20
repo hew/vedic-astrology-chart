@@ -45,6 +45,9 @@ export function calculateHouses(
 
   // Place planets in houses using whole sign system
   Object.entries(normalizedPlanets).forEach(([planetName, degree]) => {
+    // Skip undefined planets (optional outer planets)
+    if (degree === undefined) return;
+
     const planetSignStart = Math.floor(degree / 30) * 30;
     const ascendantSignIndex = Math.floor(ascendantSignStart / 30);
     const planetSignIndex = Math.floor(planetSignStart / 30);
@@ -72,6 +75,9 @@ export function getPlanetSymbol(planetName: string): string {
     Saturn: '♄',
     Rahu: '☊',
     Ketu: '☋',
+    Uranus: '♅',
+    Neptune: '♆',
+    Pluto: '♇',
   };
   return symbols[planetName] || planetName.substring(0, 1);
 }
@@ -87,6 +93,9 @@ export function getPlanetName(planetName: string): string {
     Saturn: 'Sa',
     Rahu: 'Ra',
     Ketu: 'Ke',
+    Uranus: 'Ur',
+    Neptune: 'Ne',
+    Pluto: 'Pl',
   };
   return names[planetName] || planetName.substring(0, 1);
 }
@@ -125,6 +134,9 @@ export function getPlanetDegree(
     allowKetuOverride
   );
   let degree = normalizedPlanets[planetName as keyof PlanetaryPositions];
+
+  // Return empty string if planet is not provided (optional planets)
+  if (degree === undefined) return '';
 
   // Special handling for Rahu-Ketu to ensure identical degree/minute display
   // Only if override is not allowed

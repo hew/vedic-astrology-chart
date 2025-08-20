@@ -11,6 +11,9 @@ export const sampleChartData: VedicChartData = {
     Saturn: 220.5,
     Rahu: 89.1, // North Node
     Ketu: 0.0, // South Node
+    Uranus: 300.0, // Optional outer planets
+    Neptune: 320.0,
+    Pluto: 340.0,
   },
   ascendant: 236.1, // Sidereal ascendant
   ayanamsa: 24.12, // Lahiri ayanamsa
