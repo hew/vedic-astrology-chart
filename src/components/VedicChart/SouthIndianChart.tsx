@@ -127,7 +127,7 @@ const SouthIndianChart: React.FC<ChartProps> = ({
                     x={planetX}
                     y={baseY}
                     textAnchor="middle"
-                    fontSize="12"
+                    fontSize="16"
                     fill={getPlanetColor(planetName)}
                   >
                     <tspan fontWeight="bold">
@@ -163,7 +163,7 @@ const SouthIndianChart: React.FC<ChartProps> = ({
               x={firstHouseCenter.x}
               y={ascendantY}
               textAnchor="middle"
-              fontSize="12"
+              fontSize="16"
               fill="black"
             >
               <tspan fontWeight="bold">

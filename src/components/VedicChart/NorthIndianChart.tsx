@@ -72,7 +72,7 @@ const NorthIndianChart: React.FC<ChartProps> = ({
     { num: 1, x: centerX, y: centerY - size * 0.2 },
     
     // 2nd house 
-    { num: 2, x: centerX - size * 0.2, y: centerY - size * 0.32 },
+    { num: 2, x: centerX - size * 0.2, y: centerY - size * 0.31 },
     
     // 3rd house 
     { num: 3, x: centerX - size * 0.32, y: centerY - size * 0.192 },
@@ -102,7 +102,7 @@ const NorthIndianChart: React.FC<ChartProps> = ({
     { num: 11, x: centerX + size * 0.32, y: centerY - size * 0.192 },
     
     // 12th house 
-    { num: 12, x: centerX + size * 0.2, y: centerY - size * 0.32 }
+    { num: 12, x: centerX + size * 0.2, y: centerY - size * 0.31 }
   ];
 
   return (
