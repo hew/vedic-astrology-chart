@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/hew/vedic-astrology-chart#readme",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
     "test": "vitest",
     "lint": "eslint src --ext .ts,.tsx"
   },
@@ -45,8 +46,12 @@
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0",
+    "vitest": "^0.34.0",
+    "eslint": "^8.0.0"
   }
 }
