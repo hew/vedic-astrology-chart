@@ -1,13 +1,14 @@
 {
   "name": "vedic-astrology-chart",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Beautiful Vedic (Jyotish) astrology chart component for React",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/hew/vedic-astrology-chart#readme",
   "scripts": {
     "build": "vite build",
+    "prepublishOnly": "npm run build",
     "dev": "vite",
     "preview": "vite preview",
     "test": "vitest",
