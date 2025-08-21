@@ -1,25 +1,28 @@
-# Vedic Astrology Chart 🕉️
+# Vedic Astrology Chart
 
-Beautiful, interactive SVG-based Vedic (Jyotish) astrology chart component for React applications. Renders traditional North Indian and South Indian style charts with accurate planetary positions.
+## Overview
 
-![Vedic Chart Example](https://via.placeholder.com/600x400?text=Vedic+Astrology+Chart)
+A beautiful React component for rendering Vedic (Jyotish) astrology charts. Supports both North Indian and South Indian chart formats with accurate whole sign house system calculations.
 
 ## Features
 
-- 🎨 **Traditional Styles** - North Indian (diamond) and South Indian (square) formats
-- 🪐 **Navagraha** - All nine Vedic planets including Rahu/Ketu
-- ♈ **Sidereal Zodiac** - Accurate Lahiri ayanamsa calculations
-- 🏠 **Bhava System** - Equal house or Bhava Chalit options
-- ✨ **Divisional Charts** - D1 (Rashi), D9 (Navamsa), D10 (Dashamsa), etc.
-- 🌙 **Nakshatras** - 27 lunar mansion overlays with pada divisions
-- 📊 **Dasha Periods** - Vimshottari dasha timeline display
-- 🎯 **Yogas** - Automatic detection of important planetary combinations
-- 📱 **Responsive** - Scales perfectly on any device
+- **Dual Chart Formats**: North Indian (diamond) and South Indian (grid) styles
+- **Whole Sign System**: Accurate Vedic astrology house calculations
+- **Flexible Planet Display**: Choose between traditional astronomical symbols or abbreviated names
+- **Sidereal Positions**: Works with sidereal planetary positions
+- **Ascendant Display**: Shows ascendant with exact degrees in both chart formats
+- **Smart Stacking**: Automatic vertical stacking when multiple planets occupy the same house
+- **Rahu-Ketu Synchronization**: Ensures North and South nodes are exactly 180° apart
+- **Dynamic House Labels**: Shows zodiac sign numbers (1-12) based on ascendant position
+- **Customizable**: Adjustable dimensions, house numbers, zodiac labels
+- **TypeScript**: Full type safety and IntelliSense support
 
 ## Installation
 
 ```bash
 npm install vedic-astrology-chart
+# or
+bun add vedic-astrology-chart
 # or
 yarn add vedic-astrology-chart
 ```
@@ -32,199 +35,332 @@ import { VedicChart } from 'vedic-astrology-chart';
 function MyChart() {
   const birthChart = {
     planets: {
-      Sun: 95.5,      // Sidereal positions
-      Moon: 145.2,    
+      Sun: 95.5, // Sidereal positions in degrees
+      Moon: 145.2,
       Mars: 310.7,
       Mercury: 108.8,
       Jupiter: 85.2,
       Venus: 200.3,
       Saturn: 270.5,
-      Rahu: 42.3,     // North Node
-      Ketu: 222.3     // South Node
+      Rahu: 42.3, // North Node
+      Ketu: 222.3, // South Node (automatically synchronized to be 180° from Rahu)
     },
-    ascendant: 15.5,  // Sidereal ascendant
-    ayanamsa: 24.12   // Lahiri ayanamsa
+    ascendant: 15.5, // Sidereal ascendant in degrees
   };
 
   return (
     <VedicChart
       {...birthChart}
-      style="north"  // or "south"
+      style="north" // or "south"
       width={600}
       height={600}
-      showNakshatras={true}
+      showHouseLabels={true}
+      planetDisplayMode="symbols" // or "names"
     />
   );
 }
 ```
 
-## Chart Styles
+## Development
 
-### North Indian Style (Diamond)
-Traditional diamond-shaped chart with houses in fixed positions and signs rotating based on ascendant.
+To run the demo locally:
 
-### South Indian Style (Square)
-Square chart with signs in fixed positions and house numbers rotating based on ascendant.
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/hew/vedic-astrology-chart.git
+   cd vedic-astrology-chart
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   bun install
+   # or npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   bun run dev
+   # or npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:3000`
 
 ## API Reference
 
-### Props
+### VedicChart Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `width` | number | 600 | Chart width in pixels |
-| `height` | number | 600 | Chart height in pixels |
-| `style` | string | 'north' | 'north' or 'south' Indian style |
-| `planets` | PlanetData | required | Sidereal planet positions (0-360) |
-| `ascendant` | number | required | Sidereal ascendant degree |
-| `ayanamsa` | number | 24.12 | Ayanamsa value for calculations |
-| `showNakshatras` | boolean | false | Display nakshatra divisions |
-| `showDegrees` | boolean | true | Show exact degrees |
-| `colorScheme` | string | 'traditional' | Color theme |
-| `divisionalChart` | string | 'D1' | Which divisional chart to show |
+| Prop                | Type                   | Default      | Description                                                      |
+| ------------------- | ---------------------- | ------------ | ---------------------------------------------------------------- |
+| `planets`           | `PlanetaryPositions`   | **required** | Sidereal positions of all 9 planets (0-360°)                     |
+| `ascendant`         | `number`               | **required** | Sidereal ascendant position (0-360°)                             |
+| `style`             | `'north' \| 'south'`   | `'north'`    | Chart style format                                               |
+| `width`             | `number`               | `600`        | Chart width in pixels                                            |
+| `height`            | `number`               | `600`        | Chart height in pixels                                           |
+| `showHouseLabels`   | `boolean`              | `true`       | Show zodiac sign numbers in chart                                |
+| `planetDisplayMode` | `'symbols' \| 'names'` | `'symbols'`  | Display planets as symbols (☉♂♃) or names (Su Ma Ju)            |
+| `allowKetuOverride` | `boolean`              | `false`      | Allow custom Ketu position instead of auto-calculating from Rahu |
 
-### Planet Input Format
+### PlanetaryPositions
 
-```typescript
-interface VedicPlanetData {
-  Sun: number;     // Surya - 0-360 sidereal degrees
-  Moon: number;    // Chandra
-  Mars: number;    // Mangal/Kuja
-  Mercury: number; // Budha
-  Jupiter: number; // Guru/Brihaspati
-  Venus: number;   // Shukra
-  Saturn: number;  // Shani
-  Rahu: number;    // North Node (always retrograde)
-  Ketu: number;    // South Node (always retrograde)
+```tsx
+interface PlanetaryPositions {
+  // Traditional Vedic planets (required)
+  Sun: number; // 0-360 degrees
+  Moon: number; // 0-360 degrees
+  Mars: number; // 0-360 degrees
+  Mercury: number; // 0-360 degrees
+  Jupiter: number; // 0-360 degrees
+  Venus: number; // 0-360 degrees
+  Saturn: number; // 0-360 degrees
+  Rahu: number; // 0-360 degrees (North Node)
+  Ketu: number; // 0-360 degrees (South Node - automatically synchronized with Rahu)
+
+  // Optional outer planets (modern astrology)
+  Uranus?: number; // 0-360 degrees (optional)
+  Neptune?: number; // 0-360 degrees (optional)
+  Pluto?: number; // 0-360 degrees (optional)
 }
 ```
 
-## Nakshatras (Lunar Mansions)
+## Chart Styles
 
-The 27 nakshatras are automatically calculated and can be displayed:
+### North Indian Style
 
-- Ashwini, Bharani, Krittika, Rohini...
-- Each nakshatra = 13°20' 
-- 4 padas (quarters) per nakshatra
-- Special muhurta calculations
+- Diamond-shaped layout with triangular houses
+- Traditional format used in North India
+- Houses arranged in clockwise sequence starting from ascendant
+- Kendra houses (1, 4, 7, 10) in diamond positions
+- Ascendant and planets stack vertically when in same house
+- Dynamic house labels show zodiac sign numbers based on ascendant
 
-## Divisional Charts (Vargas)
+### South Indian Style
 
-Support for all 16 main divisional charts:
+- Square grid layout (4x4)
+- Traditional format used in South India
+- Fixed house positions regardless of ascendant
+- Corner houses with diagonal divisions
+- Ascendant appears in house 1 (bottom-right corner)
+- Dynamic house labels show zodiac sign numbers based on ascendant
 
-- **D1** - Rashi (Main birth chart)
-- **D9** - Navamsa (Marriage & dharma)
-- **D10** - Dashamsa (Career)
-- **D12** - Dwadashamsa (Parents)
-- **D16** - Shodashamsa (Vehicles)
-- **D20** - Vimshamsa (Spiritual progress)
-- **D24** - Chaturvimshamsa (Education)
-- **D27** - Saptavimshamsa (Strengths)
-- **D30** - Trimshamsa (Misfortunes)
-- **D60** - Shashtiamsa (Past karma)
+## Planet Display Options
 
-## Contributing 🤝
+### Symbols Mode (`planetDisplayMode="symbols"`)
 
-We welcome contributions to improve Vedic astrology calculations and visualizations!
+Traditional and modern astronomical symbols:
 
-### Areas We Need Help With
+**Traditional Vedic Planets:**
 
-- 🔢 **Calculation Accuracy** - Improve astronomical calculations
-- 🎨 **Traditional Designs** - Authentic chart styles from different regions
-- 📚 **Yoga Detection** - Add more planetary combination detections
-- 🌐 **Internationalization** - Support for Hindi, Sanskrit, Tamil, etc.
-- 📊 **Dasha Systems** - Add Chara, Yogini, Ashtottari dashas
-- 🏛️ **House Systems** - Implement Sripati, KP system
-- 📖 **Documentation** - Add more examples and explanations
-- 🧪 **Testing** - Verify calculations against ephemeris
+- **☉** Ari 15°30' (Sun in Aries)
+- **☽** Tau 22°15' (Moon in Taurus)
+- **♂** Gem 8°45' (Mars in Gemini)
+- **☿** Can 28°12' (Mercury in Cancer)
+- **♃** Leo 5°20' (Jupiter in Leo)
+- **♀** Vir 19°35' (Venus in Virgo)
+- **♄** Lib 14°48' (Saturn in Libra)
+- **☊** Sco 7°22' (Rahu in Scorpio)
+- **☋** Tau 7°22' (Ketu in Taurus)
 
-### How to Contribute
+**Optional Outer Planets:**
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/yoga-detection`)
-3. Commit your changes (`git commit -m 'Add Raj Yoga detection'`)
-4. Push to the branch (`git push origin feature/yoga-detection`)
-5. Open a Pull Request
+- **♅** Aqu 12°45' (Uranus in Aquarius)
+- **♆** Pis 5°18' (Neptune in Pisces)
+- **♇** Cap 28°33' (Pluto in Capricorn)
 
-### Development Setup
+### Names Mode (`planetDisplayMode="names"`)
 
-```bash
-# Clone your fork
-git clone https://github.com/YOUR-USERNAME/vedic-astrology-chart.git
-cd vedic-astrology-chart
+**Traditional Planets:** Su, Mo, Ma, Me, Ju, Ve, Sa, Ra, Ke
 
-# Install dependencies
-npm install
+**Outer Planets:** Ur, Ne, Pl
 
-# Run development server
-npm run dev
+### Ascendant Display
 
-# Run tests
-npm test
+The ascendant (ASC) is displayed with its sign and exact degree:
+
+- **ASC** Ari 15°30' (Ascendant in Aries at 15 degrees 30 minutes)
+
+## House System
+
+This component uses the **Whole Sign House System**, where:
+
+- Each house occupies exactly one zodiac sign (30°)
+- House boundaries align with sign boundaries
+- Planets are placed based on the sign they occupy
+- Traditional Vedic approach to house division
+- First house always starts with the ascendant's sign
+
+## Dynamic House Labels
+
+House labels show zodiac sign numbers (1-12) that correspond to the actual signs in each house:
+
+- **Sign Numbers**: Aries=1, Taurus=2, Gemini=3, Cancer=4, Leo=5, Virgo=6, Libra=7, Scorpio=8, Sagittarius=9, Capricorn=10, Aquarius=11, Pisces=12
+- **Example**: If ascendant is in Scorpio (8), then house labels will be:
+  - 1st house = 8 (Scorpio)
+  - 2nd house = 9 (Sagittarius)
+  - 3rd house = 10 (Capricorn)
+  - ...
+  - 12th house = 7 (Libra)
+
+## Smart Features
+
+### Automatic Stacking
+
+When multiple planets occupy the same house:
+
+- Ascendant appears first (in house 1 only)
+- Planets stack vertically below ascendant or house number
+- Stack is centered within the house area
+- Prevents overlapping text
+
+### Rahu-Ketu Synchronization
+
+- Ketu is automatically positioned exactly 180° opposite to Rahu
+- Both nodes display identical degrees and minutes
+- Eliminates floating-point precision errors
+- Maintains traditional astronomical relationship
+
+## Customization Options
+
+### Display Controls
+
+- **House Labels**: Toggle display of zodiac sign numbers (1-12)
+- **Planet Display**: Choose between astronomical symbols or abbreviated names
+
+### Styling
+
+- **Responsive**: SVG-based rendering scales to any size
+- **Customizable Dimensions**: Set width and height as needed
+- **Clean Typography**: Optimized font sizes for readability
+- **Color Coding**: Different colors for planets, ascendant, and house labels
+
+## Advanced Usage
+
+### Custom Ketu Position (Divisional Charts)
+
+For divisional charts where Ketu might not be exactly opposite to Rahu:
+
+```tsx
+const divisionalChartData = {
+  planets: {
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 180.5, // Custom position - not exactly opposite to Rahu
+  },
+  ascendant: 15.5,
+};
+
+<VedicChart
+  {...divisionalChartData}
+  allowKetuOverride={true} // Allow custom Ketu position
+  style="north"
+  width={600}
+  height={600}
+/>;
 ```
 
-### Calculation Resources
+### Default Behavior (Birth Charts)
 
-- Swiss Ephemeris for accurate planetary positions
-- Lahiri ayanamsa standard (or custom)
-- Traditional texts: BPHS, Jataka Parijata, Phaladeepika
+For standard birth charts where Ketu should be exactly 180° from Rahu:
 
-## Examples
-
-### Basic Rashi Chart
 ```tsx
-<VedicChart 
-  planets={siderealPositions} 
-  ascendant={lagna}
+<VedicChart
+  {...birthChartData}
+  allowKetuOverride={false} // Auto-calculate Ketu from Rahu (default)
   style="north"
 />
 ```
 
-### Navamsa with Nakshatras
+### Including Outer Planets
+
 ```tsx
-<VedicChart 
-  planets={navamsaPositions}
-  divisionalChart="D9"
-  showNakshatras={true}
-  style="south"
-/>
+const modernVedicChart = {
+  planets: {
+    // Traditional planets (always required)
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+
+    // Optional outer planets
+    Uranus: 15.8,
+    Neptune: 340.2,
+    Pluto: 275.6,
+  },
+  ascendant: 15.5,
+};
+
+<VedicChart {...modernVedicChart} style="north" width={600} height={600} />;
 ```
 
-### Transit Overlay
+### Traditional Vedic Chart (Without Outer Planets)
+
 ```tsx
-<VedicChart 
-  planets={natalPlanets}
-  transits={currentTransits}
-  showTransitRing={true}
-/>
+const traditionalChart = {
+  planets: {
+    // Only the 9 traditional planets
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+    // Uranus, Neptune, Pluto are omitted
+  },
+  ascendant: 15.5,
+};
 ```
 
-## Traditional Calculations
+### Partial Outer Planet Inclusion
 
-All calculations follow traditional Vedic astrology principles:
-- Sidereal zodiac (not tropical)
-- Whole sign houses standard
-- True nodes (not mean nodes)
-- Traditional planetary dignities
+```tsx
+const partialModernChart = {
+  planets: {
+    // Traditional planets
+    Sun: 95.5,
+    Moon: 145.2,
+    Mars: 310.7,
+    Mercury: 108.8,
+    Jupiter: 85.2,
+    Venus: 200.3,
+    Saturn: 270.5,
+    Rahu: 42.3,
+    Ketu: 222.3,
+
+    // Include only some outer planets
+    Pluto: 275.6,
+    // Uranus and Neptune are omitted
+  },
+  ascendant: 15.5,
+};
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-MIT - Use freely in your projects!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## Acknowledgments
 
-- 🐛 [Report bugs](https://github.com/hew/vedic-astrology-chart/issues)
-- 💬 [Ask questions](https://github.com/hew/vedic-astrology-chart/discussions)
-- ⭐ [Star the repo](https://github.com/hew/vedic-astrology-chart) if you like it!
-
-## Resources
-
-- [Vedic Astrology Basics](https://www.vedic-astrology.net)
-- [Swiss Ephemeris](https://www.astro.com/swisseph/)
-- [Lahiri Ayanamsa](https://www.astro.com/swisseph/ayanamsha.htm)
-
----
-
-**ॐ असतो मा सद्गमय** - Lead us from ignorance to truth
-
-Made with 🕉️ and ❤️ for the Jyotish community
+- Built with React and TypeScript
+- SVG-based rendering for crisp, scalable charts
+- Follows traditional Vedic astrology principles
+- Accurate whole sign house system implementation
